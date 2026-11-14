@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vista de lista normal de pedidos -->
+    <record id="sale_order_view_list_tienda_unicah" model="ir.ui.view">
+        <field name="name">sale.order.list.tienda.unicah</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="tipo_cliente" optional="show"/>
+                <field name="convenio_id" optional="show"/>
+                <field name="monto_ahorro" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vista de lista del dashboard de presupuestos -->
+    <record id="sale_order_dashboard_list_tienda_unicah" model="ir.ui.view">
+        <field name="name">sale.order.dashboard.list.tienda.unicah</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_list_with_dashboard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="tipo_cliente" optional="show"/>
+                <field name="convenio_id" optional="show"/>
+                <field name="monto_ahorro" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Filtros y agrupaciones -->
+    <record id="sale_order_view_search_tienda_unicah" model="ir.ui.view">
+        <field name="name">sale.order.search.tienda.unicah</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator/>
+
+                <filter name="filtro_estudiantes"
+                        string="Estudiantes"
+                        domain="[('tipo_cliente', '=', 'estudiante')]"/>
+
+                <filter name="filtro_docentes"
+                        string="Docentes"
+                        domain="[('tipo_cliente', '=', 'docente')]"/>
+
+                <filter name="filtro_administrativos"
+                        string="Administrativos"
+                        domain="[('tipo_cliente', '=', 'administrativo')]"/>
+
+                <separator/>
+
+                <filter name="agrupar_tipo_cliente"
+                        string="Agrupar por tipo de cliente"
+                        context="{'group_by': 'tipo_cliente'}"/>
+
+                <filter name="agrupar_convenio"
+                        string="Agrupar por convenio"
+                        context="{'group_by': 'convenio_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vista de formulario -->
+    <record id="sale_order_view_form_tienda_unicah" model="ir.ui.view">
+        <field name="name">sale.order.form.tienda.unicah</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="tipo_cliente" readonly="1"/>
+                <field name="convenio_id"/>
+                <field name="monto_ahorro" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="action_aplicar_convenio"
+                        type="object"
+                        string="Aplicar convenio"
+                        class="btn-primary"
+                        invisible="not convenio_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
