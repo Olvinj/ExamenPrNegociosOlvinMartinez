@@ -1,7 +1,7 @@
 ﻿# Examen de Programación de Negocios - UNICAH
 
 **Estudiante:** Olvin Javier Martínez Funez  
-**Número de cuenta:** PENDIENTE  
+**Número de cuenta:** 1503200402442  
 **Plataforma:** Odoo 20.0
 
 ## Descripción
