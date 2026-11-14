@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Herencia del formulario de productos -->
+    <record id="view_product_template_form_biblioteca" model="ir.ui.view">
+        <field name="name">product.template.form.biblioteca</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="es_libro_unicah"/>
+                <field name="isbn_biblioteca"
+                       invisible="not es_libro_unicah"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Lista de libros -->
+    <record id="view_biblioteca_libro_list" model="ir.ui.view">
+        <field name="name">unicah.biblioteca.libro.list</field>
+        <field name="model">unicah.biblioteca.libro</field>
+        <field name="arch" type="xml">
+            <list string="Libros de la biblioteca">
+                <field name="name"/>
+                <field name="isbn"/>
+                <field name="autor"/>
+                <field name="categoria_id"/>
+                <field name="precio"/>
+                <field name="existencias"/>
+                <field name="valor_inventario"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Formulario de libros -->
+    <record id="view_biblioteca_libro_form" model="ir.ui.view">
+        <field name="name">unicah.biblioteca.libro.form</field>
+        <field name="model">unicah.biblioteca.libro</field>
+        <field name="arch" type="xml">
+            <form string="Libro">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="isbn"/>
+                            <field name="autor"/>
+                            <field name="categoria_id"/>
+                        </group>
+                        <group>
+                            <field name="precio"/>
+                            <field name="existencias"/>
+                            <field name="valor_inventario" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción de libros -->
+    <record id="action_biblioteca_libro" model="ir.actions.act_window">
+        <field name="name">Libros</field>
+        <field name="res_model">unicah.biblioteca.libro</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Acción inicial de la aplicación -->
+    <record id="menu_unicah_biblioteca_root" model="ir.ui.menu">
+        <field name="action" ref="action_biblioteca_libro"/>
+    </record>
+
+    <!-- Menú de libros -->
+    <menuitem
+        id="menu_biblioteca_libro"
+        name="Libros"
+        parent="menu_unicah_biblioteca_root"
+        action="action_biblioteca_libro"
+        sequence="10"
+    />
+
+</odoo>

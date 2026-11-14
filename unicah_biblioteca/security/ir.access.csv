@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,operation,domain
+access_biblioteca_categoria_user,biblioteca categoria user,model_unicah_biblioteca_categoria,base.group_user,r,
+access_biblioteca_categoria_admin,biblioteca categoria admin,model_unicah_biblioteca_categoria,base.group_system,crud,
+access_biblioteca_libro_user,biblioteca libro user,model_unicah_biblioteca_libro,base.group_user,crud,
+access_biblioteca_libro_admin,biblioteca libro admin,model_unicah_biblioteca_libro,base.group_system,crud,
